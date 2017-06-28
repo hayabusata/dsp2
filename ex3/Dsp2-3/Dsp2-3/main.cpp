@@ -1,10 +1,4 @@
-//
-//  main.cpp
-//  Dsp2-3
-//
-//  Created by 杉山隼太 on 2017/06/15.
-//  Copyright © 2017年 hayabusa. All rights reserved.
-//
+/*dsp2-3/5J16/杉山隼太*/
 
 #include <iostream>
 #include <vector>
@@ -206,15 +200,23 @@ void Matrix::power() {
             eigenVector = multiplyMatrix(pastVector);
             eigenValue = eigenVector.getInnerProduct(pastVector);
         }
+
+        cout << "e = " << eigenVector.normalizeMatrix().subtractMatrix(pastVector).getAbsoluteValue() << endl;
     } while (eigenVector.normalizeMatrix().subtractMatrix(pastVector).getAbsoluteValue() >= EPSILON);
     
-    cout << "eigenValue:" << eigenValue << endl;
+    cout << endl << "eigen value:" << eigenValue << endl << endl;
     eigenVector = eigenVector.normalizeMatrix();
+    cout << "eigen vector:" << endl;
     eigenVector.display();
     
     Matrix trans = eigenVector.transposeMatrix();
     trans.constantMult(eigenValue);
     count++;
+
+    cout << "the residual matrix:" << endl;
+    subtractMatrix(eigenVector.multiplyMatrix(trans)).display();
+
+    cout << "---------------------------" << endl << endl;
     
     if (count != getNumOfRow()) subtractMatrix(eigenVector.multiplyMatrix(trans)).power();
     
@@ -222,6 +224,11 @@ void Matrix::power() {
 
 int main(int argc, const char * argv[]) {
     // insert code here...
+
+    cout << "H29年度・dsp2-3・5J16杉山隼太" << endl;
+    cout << "--------how to use--------" << endl;
+    cout << "プログラムを実行すると，課題の行列の固有値・固有ベクトルをパワー法で求めてくれる．" << endl << endl;
+
     //vector<vector <double> > v = {{2, 1, 3}, {1, 2, 3}, {3, 3, 20}};
     //vector<vector <double> > v = {{2, 1}, {1, 2}};
     /*vector<vector <double> > v(2, vector<double>(2));
@@ -240,7 +247,9 @@ int main(int argc, const char * argv[]) {
     v[2][1] = 3;
     v[2][2] = 20;
     Matrix mat(v);
+    cout << "matrix of the challenges:" << endl;
     mat.display();
+    cout << "---------------------------" << endl << endl;
     mat.power();
     return 0;
 }

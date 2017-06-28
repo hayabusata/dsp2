@@ -1,11 +1,3 @@
-//
-//  Matrix.hpp
-//  Dsp2-3
-//
-//  Created by 杉山隼太 on 2017/06/16.
-//  Copyright © 2017年 hayabusa. All rights reserved.
-//
-
 #ifndef Matrix_h
 #define Matrix_h
 
